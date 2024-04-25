@@ -25,16 +25,21 @@ class Hotspot extends CI_Controller {
 	}
 
 	public function user(){
+		$ip = $this->session->userdata('ip');
+		$user = $this->session->userdata('user');
+		$password = $this->session->userdata('password');
 		$API = new Mikweb();
-		$API->connect('103.169.7.234', 'wildan', '1234');
+		$API->connect($ip, $user, $password);
+		// $API->connect('103.169.7.234', 'wildan', '1234');
 		$hotspotuser = $API->comm('/ip/hotspot/user/print');
 		$hotspotuser = json_encode($hotspotuser);
 		$hotspotuser = json_decode($hotspotuser,true);
 		$data = [
+			'title' => 'User Mikweb',
 			'totalhotspotuser' => count($hotspotuser),
 			'hotspotuser' => $hotspotuser,
 		];
-		$this->load->view('template/main');
+		$this->load->view('template/main', $data);
 		$this->load->view('hotspot/user', $data);
 	}
 }

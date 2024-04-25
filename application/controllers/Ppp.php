@@ -21,7 +21,7 @@ class Ppp extends CI_Controller
             'profile' => $profile,
         ];
 
-        $this->load->view('template/main');
+        $this->load->view('template/main', $data);
         $this->load->view('ppp/secret', $data);
     }
 

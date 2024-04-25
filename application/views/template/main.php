@@ -183,7 +183,7 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
+              <a href="<?= site_url('dashboard');?>" class="nav-link <?= $title =='Dashboard Mikweb' ? 'active': ''?>" >
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -206,7 +206,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url('hotspot/user') ?>" class="nav-link">
+                  <a href="<?= base_url('hotspot/user') ?>" class="nav-link <?= $title =='User Mikweb' ? 'active': ''?>">
                     <i class="far fa-circle nav-icon"></i>
                     <p>User</p>
                   </a>
@@ -247,7 +247,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?= site_url('ppp/secret')?>" class="nav-link">
+                  <a href="<?= site_url('ppp/secret')?>" class="nav-link <?= $title =='PPP Secret Mikweb' ? 'active': ''?>">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Secret</p>
                   </a>
