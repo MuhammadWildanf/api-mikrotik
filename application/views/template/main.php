@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard 2</title>
+  <title>Mikrotik | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="<?= base_url('assets/template') ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url('assets/template') ?>/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/template') ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/template') ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -158,6 +160,11 @@
             <i class="fas fa-th-large"></i>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('auth/logout');?>">
+            <i class="fas fa-power-off"></i>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -167,7 +174,7 @@
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
         <img src="<?= base_url('assets/template') ?>/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Mikrotik</span>
       </a>
 
       <!-- Sidebar -->
@@ -199,7 +206,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url('hotspot/user')?>" class="nav-link">
+                  <a href="<?= base_url('hotspot/user') ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>User</p>
                   </a>
@@ -230,6 +237,41 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  ppp
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= site_url('ppp/secret')?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Secret</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= site_url('ppp/pppoe')?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>PPPOE</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= site_url('ppp/profile')?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Profile</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= site_url('ppp/active')?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Active</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
@@ -238,7 +280,7 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    
+
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
@@ -281,6 +323,13 @@
   <script src="<?= base_url('assets/template') ?>/dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?= base_url('assets/template') ?>/dist/js/pages/dashboard2.js"></script>
+
+  <script src="<?= base_url('assets/template') ?>/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?= base_url('assets/template') ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?= base_url('assets/template') ?>/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="<?= base_url('assets/template') ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 </body>
 
 </html>
+
+<?php ini_set('display_errors','off');?>

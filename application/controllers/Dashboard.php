@@ -5,8 +5,12 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
+		// $ip = $this->session->userdata('ip');
+		// $user = $this->session->userdata('user');
+		// $password = $this->session->userdata('password');
 		$API = new Mikweb();
 		$API->connect('103.169.7.234', 'wildan', '1234');
+		// $API->connect($ip, $user, $password);
 		$hotspotuser = $API->comm('/ip/hotspot/user/print');
 		$hotspotactiv = $API->comm('/ip/hotspot/active/print');
 		$resource = $API->comm('/system/resource/print');
