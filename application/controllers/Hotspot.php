@@ -32,15 +32,41 @@ class Hotspot extends CI_Controller {
 		$API->connect($ip, $user, $password);
 		// $API->connect('103.169.7.234', 'wildan', '1234');
 		$hotspotuser = $API->comm('/ip/hotspot/user/print');
-		$hotspotuser = json_encode($hotspotuser);
-		$hotspotuser = json_decode($hotspotuser,true);
+		$server = $API->comm('/ip/hotspot/print');
+		$profile = $API->comm('/ip/hotspot/user/profile/print');
 		$data = [
 			'title' => 'User Mikweb',
 			'totalhotspotuser' => count($hotspotuser),
 			'hotspotuser' => $hotspotuser,
+			'server' => $server,
+			'profile' => $profile,
 		];
 		$this->load->view('template/main', $data);
 		$this->load->view('hotspot/user', $data);
+	}
+
+	public function addUser(){
+		$post = $this->input->post(null,true);
+		$ip = $this->session->userdata('ip');
+		$user = $this->session->userdata('user');
+		$password = $this->session->userdata('password');
+		$API = new Mikweb();
+		$API->connect($ip, $user, $password);
+		if ($post['timelimit'] == "") {
+            $timelimit = "0.0.0.0";
+        } else {
+            $timelimit = $post['timelimit'];
+        }
+		$API->comm("/ip/hotspot/user/add", array(
+			"name" => $post['user'],
+			"password" => $post['password'],
+			"server" => $post['server'],
+			"profile" => $post['profile'],
+			"limit-uptime" => $timelimit,
+			"comment" => $post['comment'],
+		) );
+
+		redirect('hotspot/user');
 	}
 }
 

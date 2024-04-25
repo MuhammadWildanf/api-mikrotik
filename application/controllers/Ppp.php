@@ -35,6 +35,7 @@ class Ppp extends CI_Controller
         } else {
             $localaddress = $post['localaddress'];
         }
+        
         if ($post['remoteaddress'] == "") {
             $remoteaddress = "0.0.0.0";
         } else {
