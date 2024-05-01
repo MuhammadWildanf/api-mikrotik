@@ -28,7 +28,10 @@
                                     <tbody>
                                         <?php foreach ($hotspotuser  as $data) { ?>
                                             <tr>
-                                                <td></td>
+                                                <td>
+                                                    <a href="http://"><i class="fas fa-trash" style="color: red;"></i></a>
+                                                    <a href="http://"><i class="fas fa-edit" style="color: yellow;"></i></a>
+                                                </td>
                                                 <td><?= $data['name']; ?></td>
                                                 <td><?= $data['password']; ?></td>
                                                 <td><?= $data['profile']; ?></td>

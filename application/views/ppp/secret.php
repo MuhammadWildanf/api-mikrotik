@@ -2,10 +2,21 @@
     <div class="content-header">
         <div class="container-fluid">
             <h3><?= $title ?></h3>
+            <?php if ($this->session->flashdata('success')) { ?>
+                <div class="alert alert-success" role="alert">
+                    <?= $this->session->flashdata('success'); ?>
+                </div>
+            <?php } ?>
+
+            <?php if ($this->session->flashdata('error')) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $this->session->flashdata('error'); ?>
+                </div>
+            <?php } ?>
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-add-ppp">
-                    <i class="fas fa-plus" style="color: blue;"></i> Add <?= $title ?>
+                        <i class="fas fa-plus" style="color: blue;"></i> Add <?= $title ?>
                     </button>
                 </div>
                 <div class="card-body">
@@ -29,8 +40,8 @@
                                         <?php foreach ($secret  as $data) { ?>
                                             <tr>
                                                 <td>
-                                                    <a href="<?= site_url('ppp/delSecret');?>" onclick="return confirm('Apakah anda yakin ingin <?= $data['name']?>')"><i class="fas fa-trash" style="color: red;"></i></a>
-                                                    <a href="<?= site_url('ppp/editSecret');?>" ><i class="fas fa-edit" style="color: yellow;"></i></a>
+                                                    <a href="<?= site_url('ppp/delSecret'); ?>" onclick="return confirm('Apakah anda yakin ingin <?= $data['name'] ?>')"><i class="fas fa-trash" style="color: red;"></i></a>
+                                                    <a href="<?= site_url('ppp/editSecret'); ?>"><i class="fas fa-edit" style="color: yellow;"></i></a>
                                                 </td>
                                                 <td><?= $data['name']; ?></td>
                                                 <td><?= $data['password']; ?></td>
@@ -55,7 +66,6 @@
 
 
 <!-- Modal -->
-<!-- Modal -->
 <div class="modal fade" id="modal-add-ppp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -63,7 +73,7 @@
                 <h5 class="modal-title fs-5" id="exampleModalLabel">Add <?= $title ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="<?= site_url('ppp/addsecret'); ?>" method="post">
+            <form id="addForm" action="<?= site_url('ppp/addsecret'); ?>" method="post">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -86,7 +96,7 @@
                         <label for="profile">Profile</label>
                         <select class="form-select" name="profile" id="profile" aria-label="Default select example">
                             <?php foreach ($profile as $data) { ?>
-                                <option value=""><?= $data['name']; ?></option>
+                                <option value="<?= $data['name']; ?>"><?= $data['name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -111,6 +121,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     $(function() {

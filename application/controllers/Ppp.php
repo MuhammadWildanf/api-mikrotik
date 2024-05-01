@@ -6,8 +6,12 @@ class Ppp extends CI_Controller
 
     public function secret()
     {
+        $ip = $this->session->userdata('ip');
+		$user = $this->session->userdata('user');
+		$password = $this->session->userdata('password');
         $API = new Mikweb();
-        $API->connect('103.169.7.234', 'wildan', '1234');
+        $API->connect($ip, $user, $password);
+        // $API->connect('103.169.7.234', 'wildan', '1234');
         $secret = $API->comm('/ppp/secret/print');
         // echo '<pre>';
         // var_dump($secret);
@@ -27,22 +31,27 @@ class Ppp extends CI_Controller
 
     public function addsecret()
     {
+        $ip = $this->session->userdata('ip');
+		$user = $this->session->userdata('user');
+		$password = $this->session->userdata('password');
         $post = $this->input->post(null, true);
         $API = new Mikweb();
-        $API->connect('103.169.7.234', 'wildan', '1234');
+        $API->connect($ip, $user, $password);
+        // $API->connect('103.169.7.234', 'wildan', '1234');
+
         if ($post['localaddress'] == "") {
             $localaddress = "0.0.0.0";
         } else {
             $localaddress = $post['localaddress'];
         }
-        
+
         if ($post['remoteaddress'] == "") {
             $remoteaddress = "0.0.0.0";
         } else {
             $remoteaddress = $post['remoteaddress'];
         }
 
-        $API->comm("/ppp/secret/add", array(
+        $result =  $API->comm("/ppp/secret/add", array(
             "name"              => $post["name"],
             "password"          => $post["password"],
             "service"           => $post["service"],
@@ -51,6 +60,13 @@ class Ppp extends CI_Controller
             "remote-address"    => $remoteaddress,
             "comment"           => $post["comment"],
         ));
+
+        if ($result) {
+            $this->session->set_flashdata('success', 'Data berhasil ditambahkan!');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menambahkan data. Silakan coba lagi.');
+        }
+
         redirect("ppp/secret");
     }
 }
