@@ -69,4 +69,61 @@ class Ppp extends CI_Controller
 
         redirect("ppp/secret");
     }
+
+    public function editsecret()
+    {
+        $ip = $this->session->userdata('ip');
+		$user = $this->session->userdata('user');
+		$password = $this->session->userdata('password');
+        $post = $this->input->post(null, true);
+        $API = new Mikweb();
+        $API->connect($ip, $user, $password);
+        // $API->connect('103.169.7.234', 'wildan', '1234');
+
+        if ($post['localaddress'] == "") {
+            $localaddress = "0.0.0.0";
+        } else {
+            $localaddress = $post['localaddress'];
+        }
+
+        if ($post['remoteaddress'] == "") {
+            $remoteaddress = "0.0.0.0";
+        } else {
+            $remoteaddress = $post['remoteaddress'];
+        }
+
+        $API->comm("/ppp/secret/set", array(
+            ".id"              => $post["id"],
+            "name"              => $post["name"],
+            "password"          => $post["password"],
+            "service"           => $post["service"],
+            "profile"           => $post["profile"],
+            "local-address"     => $localaddress,
+            "remote-address"    => $remoteaddress,
+            "comment"           => $post["comment"],
+        ));
+
+        
+
+        redirect("ppp/secret");
+    }
+
+    public function delsecret($id){
+        $ip = $this->session->userdata('ip');
+		$user = $this->session->userdata('user');
+		$password = $this->session->userdata('password');
+        $API = new Mikweb();
+        $API->connect($ip, $user, $password);
+        $result =  $API->comm("ppp/secret/remove", array(
+            ".id" => '*' . $id
+        ));
+
+        if ($result) {
+            $this->session->set_flashdata('success', 'Data berhasil dihapus!');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal hapus data. Silakan coba lagi.');
+        }
+
+        redirect("ppp/secret");
+    }
 }
