@@ -82,6 +82,6 @@ class Vpn extends CI_Controller
     public function delvpn()
     {
         $id = $this->input->post('id');
-        $this->m_vpn->delete_vpn($id); 
+        $this->m_vpn->delete_vpn($id);
     }
 }

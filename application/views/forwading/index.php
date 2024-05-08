@@ -224,7 +224,7 @@
         $('#modal-add-ppp').on('show.bs.modal', function() {
             // Panggil Ajax untuk mendapatkan data VPN
             $.ajax({
-                url: '<?= site_url('member/port/get_vpn_options'); ?>',
+                url: '<?= site_url('member/port/get_vpn_all'); ?>',
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {

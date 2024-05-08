@@ -12,6 +12,15 @@ class M_vpn extends CI_Model {
         return $this->db->get();
     }
 
+    public function vpn_all()
+    {
+        $this->db->select('*');
+        $this->db->from('remote_vpn');
+        $this->db->order_by('id', 'DESC');
+        return $this->db->get();
+    }
+
+
     public function insert($data){
         $this->db->insert('remote_vpn', $data);
     }

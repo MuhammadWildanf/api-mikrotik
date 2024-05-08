@@ -1,29 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Port extends CI_Controller
+class Forwading extends CI_Controller
 {
+
     function __construct()
     {
         parent::__construct();
         $this->load->model('m_port');
-        $this->load->model('m_vpn');
-        $this->load->library('form_validation');
     }
 
     public function index()
     {
-        $user_id = $this->session->userdata('id');
 
         $data = [
-            'title' => 'Rule Port Remote',
-            'port'   => $this->m_port->get_port($user_id)->result()
+            'title' => 'Forwading Port',
+            'port'   => $this->m_port->get_all_ports()->result()
         ];
 
-        // var_dump($data);
-        // die;
-        $this->load->view('member/main', $data);
-        $this->load->view('member/port', $data);
+        $this->load->view('template/main', $data);
+        $this->load->view('forwading/index', $data);
     }
 
     public function get_vpn_options()
@@ -31,13 +27,7 @@ class Port extends CI_Controller
         $user_id = $this->session->userdata('id');
         $vpn_data = $this->m_vpn->get_vpn($user_id)->result();
 
-        echo json_encode($vpn_data);
-    }
-
-    public function get_vpn_all()
-    {
-        $vpn_data = $this->m_vpn->vpn_all()->result();
-
+        // Mengembalikan data VPN dalam format JSON
         echo json_encode($vpn_data);
     }
 
@@ -66,12 +56,11 @@ class Port extends CI_Controller
                 'port_to' => $this->input->post('port_to'),
                 'ip_vpn' => $this->input->post('ip_vpn'),
                 'ip_remote' => $this->input->post('ip_remote'),
-                'comment' => $this->input->post('comment'),
-                'status' => 'Rule Belum Terdaftar'
+                'comment' => $this->input->post('comment')
             ]);
         }
 
-        redirect('member/port');
+        redirect('forwading');
     }
 
     public function editport($id)
@@ -84,16 +73,17 @@ class Port extends CI_Controller
     {
         $id = $this->input->post('id');
         $data = array(
-            'vpn_id' => $this->input->post('vpn_id'),
+            'vpn_id' => $this->input->post('nama'),
             'port_awal' => $this->input->post('port_awal'),
             'port_to' => $this->input->post('port_to'),
             'ip_vpn' => $this->input->post('ip_vpn'),
             'ip_remote' => $this->input->post('ip_remote'),
             'comment' => $this->input->post('comment'),
             'status' => $this->input->post('status')
+
         );
         $this->m_port->update_port($id, $data);
-        redirect('member/port');
+        redirect('forwading');
     }
 
     public function delport()

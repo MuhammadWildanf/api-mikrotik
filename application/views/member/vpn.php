@@ -39,14 +39,14 @@
                                         <?php foreach ($vpn as $data) { ?>
                                             <tr>
                                                 <td>
-                                                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="<?= $data->id ?>" data-nama="<?= $data->nama ?>" data-password="<?= $data->password ?>" data-localaddress="<?= $data->localaddress ?>" data-remoteaddress="<?= $data->remoteaddress ?>" data-comment="<?= $data->comment ?>">
+                                                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="<?= $data->id ?>" data-nama="<?= $data->nama ?>" data-user="<?= $data->user ?>" data-password="<?= $data->password ?>" data-localaddress="<?= $data->localaddress ?>" data-remoteaddress="<?= $data->remoteaddress ?>" data-comment="<?= $data->comment ?>">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
 
                                                     <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="<?= $data->id ?>">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-info btn-sm detail-btn" data-nama="<?= $data->nama ?>" data-password="<?= $data->password ?>" data-user="<?= $data->user?>">
+                                                    <a href="#" class="btn btn-info btn-sm detail-btn" data-nama="<?= $data->nama ?>" data-password="<?= $data->password ?>" data-user="<?= $data->user ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </td>

@@ -192,56 +192,9 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-wifi"></i>
-                <p>
-                  Hotspot
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Active</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= base_url('hotspot/user') ?>" class="nav-link <?= $title =='User Mikweb' ? 'active': ''?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>User</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Profile</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Binding</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Host</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Cookies</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                  ppp
+                  VPN
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -249,25 +202,13 @@
                 <li class="nav-item">
                   <a href="<?= site_url('ppp/secret')?>" class="nav-link <?= $title =='PPP Secret Mikweb' ? 'active': ''?>">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Secret</p>
+                    <p>Akun</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= site_url('ppp/pppoe')?>" class="nav-link">
+                  <a href="<?= site_url('forwading/index')?>" class="nav-link <?= $title =='PPP Secret Mikweb' ? 'active': ''?>">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>PPPOE</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= site_url('ppp/profile')?>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Profile</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= site_url('ppp/active')?>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Active</p>
+                    <p>Forwading</p>
                   </a>
                 </li>
               </ul>
