@@ -79,7 +79,7 @@
                 <h5 class="modal-title fs-5" id="exampleModalLabel">Add <?= $title ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="addForm" action="<?= site_url('member/port/addport'); ?>" method="post">
+            <form id="addForm" action="<?= site_url('forwading/addport'); ?>" method="post">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="vpn_id" class="form-label">Nama VPN</label>
@@ -138,7 +138,7 @@
                 <h5 class="modal-title fs-5" id="exampleModalLabel">Edit <?= $title ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="editForm" action="<?= site_url('member/port/updateport'); ?>" method="post">
+            <form id="editForm" action="<?= site_url('forwading/updateport'); ?>" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="id" id="edit_id">
                     <div class="mb-3">
@@ -224,7 +224,7 @@
         $('#modal-add-ppp').on('show.bs.modal', function() {
             // Panggil Ajax untuk mendapatkan data VPN
             $.ajax({
-                url: '<?= site_url('member/port/get_vpn_all'); ?>',
+                url: '<?= site_url('member/port/get_vpn_options'); ?>',
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -342,7 +342,7 @@
             // Lakukan aksi penghapusan
             $.ajax({
                 type: "POST",
-                url: "<?= site_url('member/port/delport') ?>",
+                url: "<?= site_url('forwading/delport') ?>",
                 data: {
                     id: id
                 },
