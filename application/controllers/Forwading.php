@@ -73,7 +73,6 @@ class Forwading extends CI_Controller
     {
         $id = $this->input->post('id');
         $data = array(
-            'vpn_id' => $this->input->post('nama'),
             'port_awal' => $this->input->post('port_awal'),
             'port_to' => $this->input->post('port_to'),
             'ip_vpn' => $this->input->post('ip_vpn'),

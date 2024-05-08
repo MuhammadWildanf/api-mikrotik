@@ -15,9 +15,9 @@
             <?php } ?>
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-add-ppp">
+                    <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-add-ppp">
                         <i class="fas fa-plus" style="color: blue;"></i> Add <?= $title ?>
-                    </button>
+                    </button> -->
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -56,8 +56,7 @@
                                                 <td><?= $data->ip_vpn; ?></td>
                                                 <td><?= $data->ip_remote; ?></td>
                                                 <td><?= $data->comment; ?></td>
-                                                <td><span class="badge bg-danger"><?= $data->status; ?></span></td>
-
+                                                <td><span class="badge <?= ($data->status == 'Rule Sudah Terdaftar') ? 'bg-success' : (($data->status == 'Rule Sedang Pending') ? 'bg-warning' : 'bg-danger') ?>"><?= $data->status; ?></span></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -72,7 +71,7 @@
 
 </div>
 
-<div class="modal fade" id="modal-add-ppp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="modal-add-ppp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -128,7 +127,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Your HTML content -->
 <div class="modal fade" id="modal-edit-ppp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -142,26 +141,12 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" id="edit_id">
                     <div class="mb-3">
-                        <label for="edit_vpn_id" class="form-label">Nama VPN</label>
-                        <select class="form-select" name="vpn_id" id="edit_vpn_id">
-                            <?php foreach ($vpn as $data) { ?>
-                                <option value="<?= $data->id; ?>"><?= $data->nama; ?></option>
-                            <?php } ?>
-                        </select>
+                        <label for="edit_nama_vpn" class="form-label">Nama VPN</label>
+                        <input type="text" class="form-control" name="nama_vpn" id="edit_nama_vpn" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="edit_port_awal" class="form-label">Port Awal</label>
-                        <select class="form-select" aria-label="Default select example" name="port_awal" id="edit_port_awal">
-                            <option selected>Select Port</option>
-                            <option value="21">21 - FTP</option>
-                            <option value="22">22 - SSH</option>
-                            <option value="23">23 - Telnet</option>
-                            <option value="80">80 - WWW/WEBFIG</option>
-                            <option value="443">443 - WWW/SSL</option>
-                            <option value="3389">3389 - RDP</option>
-                            <option value="8291">8291 - WINBOX</option>
-                            <option value="8728">8728 - API</option>
-                        </select>
+                        <input type="number" class="form-control" name="port_awal" id="edit_port_awal" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="edit_port_to" class="form-label">Port Forward Ke</label>
@@ -169,7 +154,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="edit_ip_vpn" class="form-label">IP VPN</label>
-                        <input type="text" class="form-control" name="ip_vpn" id="edit_ip_vpn" placeholder="IP VPN">
+                        <input type="text" class="form-control" name="ip_vpn" id="edit_ip_vpn" placeholder="IP VPN" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="edit_ip_remote" class="form-label">IP Remote</label>
@@ -220,39 +205,33 @@
 <!-- Your HTML content -->
 
 <script>
-    $(document).ready(function() {
-        $('#modal-add-ppp').on('show.bs.modal', function() {
-            // Panggil Ajax untuk mendapatkan data VPN
-            $.ajax({
-                url: '<?= site_url('member/port/get_vpn_options'); ?>',
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Bersihkan opsi sebelum menambahkan yang baru
-                    $('#vpn_id').empty();
-                    // Tambahkan opsi VPN dari data yang diterima
-                    $.each(data, function(index, item) {
-                        $('#vpn_id').append($('<option>', {
-                            value: item.id,
-                            text: item.nama,
-                            remoteaddress: item.remoteaddress // tambahkan atribut data untuk menyimpan remoteaddress
-                        }));
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        });
+    // $(document).ready(function() {
+    //     $('#modal-add-ppp').on('show.bs.modal', function() {
+    //         $.ajax({
+    //             url: '<?= site_url('member/port/get_vpn_options'); ?>',
+    //             method: 'GET',
+    //             dataType: 'json',
+    //             success: function(data) {
+    //                 $('#vpn_id').empty();
+    //                 $.each(data, function(index, item) {
+    //                     $('#vpn_id').append($('<option>', {
+    //                         value: item.id,
+    //                         text: item.nama,
+    //                         remoteaddress: item.remoteaddress 
+    //                     }));
+    //                 });
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error(xhr.responseText);
+    //             }
+    //         });
+    //     });
 
-        // Tambahkan event listener untuk perubahan dropdown "Nama VPN"
-        $('#vpn_id').on('change', function() {
-            // Ambil nilai remoteaddress dari opsi yang dipilih
-            var selectedRemoteAddress = $(this).find('option:selected').attr('remoteaddress');
-            // Isi nilai remoteaddress ke input "Ip VPN"
-            $('#ip_vpn').val(selectedRemoteAddress);
-        });
-    });
+    //     $('#vpn_id').on('change', function() {
+    //         var selectedRemoteAddress = $(this).find('option:selected').attr('remoteaddress');
+    //         $('#ip_vpn').val(selectedRemoteAddress);
+    //     });
+    // });
 </script>
 
 <script>
@@ -269,7 +248,7 @@
             $('#ip_remote').val(ipRemoteValue);
         }
     });
-    
+
     $('#edit_port_to').on('input', function() {
         // Ambil nilai yang dimasukkan oleh pengguna
         var portForwardValue = $(this).val();
@@ -295,33 +274,10 @@
         var comment = $(this).data('comment');
         var status = $(this).data('status');
 
-        // Panggil Ajax untuk mendapatkan data VPN
-        $.ajax({
-            url: '<?= site_url('member/port/get_vpn_options'); ?>',
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                // Bersihkan opsi sebelum menambahkan yang baru
-                $('#edit_vpn_id').empty();
-                // Tambahkan opsi VPN dari data yang diterima
-                $.each(data, function(index, item) {
-                    $('#edit_vpn_id').append($('<option>', {
-                        value: item.id,
-                        text: item.nama,
-                        remoteaddress: item.remoteaddress // tambahkan atribut data untuk menyimpan remoteaddress
-                    }));
-                });
-
-                // Setelah opsi VPN ditambahkan, tampilkan modal edit
-                showModalEdit(id, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment);
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
+        showModalEdit(id, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment, status);
     });
 
-    function showModalEdit(id, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment,status) {
+    function showModalEdit(id, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment, status) {
         $("#edit_id").val(id);
         $("#edit_nama_vpn").val(nama_vpn);
         $("#edit_port_awal").val(port_awal);
