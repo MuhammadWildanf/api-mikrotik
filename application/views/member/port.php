@@ -40,14 +40,11 @@
                                         <?php foreach ($port as $data) { ?>
                                             <tr>
                                                 <td>
-                                                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="<?= $data->id ?>" data-nama_vpn="<?= $data->nama_vpn ?>" data-port_awal="<?= $data->port_awal ?>" data-port_to="<?= $data->port_to ?>" data-ip_vpn="<?= $data->ip_vpn ?>" data-ip_remote="<?= $data->ip_remote ?>" data-comment="<?= $data->comment ?>">
+                                                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="<?= $data->id ?>" data-nama_vpn="<?= $data->nama_vpn ?>" data-port_awal="<?= $data->port_awal ?>" data-port_to="<?= $data->port_to ?>" data-ip_vpn="<?= $data->ip_vpn ?>" data-ip_remote="<?= $data->ip_remote ?>" data-comment="<?= $data->comment ?>" data-status="<?= $data->status ?>">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="<?= $data->id ?>">
                                                         <i class="fas fa-trash"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-info btn-sm detail-btn" data-port_awal="<?= $data->port_awal ?>" data-ip_vpn="<?= $data->ip_vpn ?>" data-port_to="<?= $data->port_to ?>">
-                                                        <i class="fas fa-eye"></i>
                                                     </a>
                                                 </td>
                                                 <td><?= $data->nama_vpn; ?></td>
@@ -56,8 +53,7 @@
                                                 <td><?= $data->ip_vpn; ?></td>
                                                 <td><?= $data->ip_remote; ?></td>
                                                 <td><?= $data->comment; ?></td>
-                                                <td><span class="badge bg-danger"><?= $data->status; ?></span></td>
-
+                                                <td><span class="badge <?= ($data->status == 'Rule Sudah Terdaftar') ? 'bg-success' : (($data->status == 'Rule Sedang Pending') ? 'bg-warning' : 'bg-danger') ?>"><?= $data->status; ?></span></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -181,11 +177,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="edit_status" class="form-label">Status</label>
-                        <select class="form-select" name="status" id="edit_status">
-                            <option value="Rule Belum Terdaftar">Rule Belum Terdaftar</option>
-                            <option value="Rule Sudah Terdaftar">Rule Sudah Terdaftar</option>
-                            <option value="Rule Sedang Pending">Rule Sedang Pending</option>
-                        </select>
+                        <input type="text" class="form-control" name="status" id="edit_status" placeholder="status" readonly>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -253,6 +245,8 @@
             $('#ip_vpn').val(selectedRemoteAddress);
         });
     });
+
+    
 </script>
 
 <script>
@@ -313,7 +307,7 @@
                 });
 
                 // Setelah opsi VPN ditambahkan, tampilkan modal edit
-                showModalEdit(id, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment);
+                showModalEdit(id, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment,status);
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);

@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Ppp extends CI_Controller
 {
+    public function __construct() {
+        parent::__construct();
+        // Memuat model M_vpn
+        $this->load->model('M_vpn');
+    }
 
     public function secret()
     {
@@ -28,7 +33,11 @@ class Ppp extends CI_Controller
         $this->load->view('template/main', $data);
         $this->load->view('ppp/secret', $data);
     }
-
+    public function getVpnList()
+    {
+        $vpn_list = $this->M_vpn->vpn_all()->result_array();
+        echo json_encode($vpn_list);
+    }
     public function addsecret()
     {
         $ip = $this->session->userdata('ip');

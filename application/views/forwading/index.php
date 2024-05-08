@@ -40,7 +40,7 @@
                                         <?php foreach ($port as $data) { ?>
                                             <tr>
                                                 <td>
-                                                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="<?= $data->id ?>" data-nama_vpn="<?= $data->nama_vpn ?>" data-port_awal="<?= $data->port_awal ?>" data-port_to="<?= $data->port_to ?>" data-ip_vpn="<?= $data->ip_vpn ?>" data-ip_remote="<?= $data->ip_remote ?>" data-comment="<?= $data->comment ?>">
+                                                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="<?= $data->id ?>" data-nama_vpn="<?= $data->nama_vpn ?>" data-port_awal="<?= $data->port_awal ?>" data-port_to="<?= $data->port_to ?>" data-ip_vpn="<?= $data->ip_vpn ?>" data-ip_remote="<?= $data->ip_remote ?>" data-comment="<?= $data->comment ?>" data-status="<?= $data->status ?>">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="<?= $data->id ?>">

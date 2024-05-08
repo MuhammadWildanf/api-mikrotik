@@ -125,15 +125,15 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" id="edit_id">
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
+                        <label for="nama" class="form-label">Nama Identity</label>
                         <input type="text" class="form-control" name="nama" id="edit_nama" placeholder="Nama">
                     </div>
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Username</label>
+                        <label for="nama" class="form-label">Username VPN</label>
                         <input type="text" class="form-control" name="user" id="edit_user" placeholder="User">
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">Password VPN</label>
                         <input type="password" class="form-control" name="password" id="edit_password" placeholder="Password">
                     </div>
                     <div class="mb-3">
