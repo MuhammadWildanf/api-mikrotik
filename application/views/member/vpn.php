@@ -130,7 +130,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="nama" class="form-label">Username</label>
-                        <input type="text" class="form-control" name="nama" id="edit_user" placeholder="User">
+                        <input type="text" class="form-control" name="user" id="edit_user" placeholder="User">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
