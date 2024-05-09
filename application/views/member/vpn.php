@@ -81,27 +81,27 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" name="nama" placeholder="nama">
+                        <input type="text" class="form-control" name="nama" id="add_nama" placeholder="nama">
                     </div>
                     <div class="mb-3">
                         <label for="user" class="form-label">Username</label>
-                        <input type="text" class="form-control" name="user" placeholder="user">
+                        <input type="text" class="form-control" name="user" id="add_user" placeholder="user">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input class="form-control" name="password" placeholder="password">
+                        <input class="form-control" name="password" id="add_password" placeholder="password">
                     </div>
                     <div class="mb-3">
                         <label for="localaddress" class="form-label">Local Address</label>
-                        <input type="text" class="form-control" name="localaddress" value="192.168.41.1" placeholder="localaddress" readonly>
+                        <input type="text" class="form-control" name="localaddress" id="add_localaddress" value="192.168.41.1" placeholder="localaddress" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="remoteaddress" class="form-label">Remote Address</label>
-                        <input type="text" class="form-control" name="remoteaddress" placeholder="remoteaddress">
+                        <input type="text" class="form-control" name="remoteaddress" id="add_remoteaddress" placeholder="remoteaddress">
                     </div>
                     <div class="mb-3">
                         <label for="comment" class="form-label">Comment</label>
-                        <input type="text" class="form-control" name="comment" placeholder="comment">
+                        <input type="text" class="form-control" name="comment" id="add_comment" placeholder="comment">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -112,6 +112,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#modal-add-ppp').on('show.bs.modal', function() {
+            $.ajax({
+                url: '<?= site_url('ppp/getsecret'); ?>',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Mengisi nilai alamat IP yang diperbarui ke dalam input "add_remoteaddress"
+                    $('#add_remoteaddress').val(data.updated_ip);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 
 <!-- Your HTML content -->
 <div class="modal fade" id="modal-edit-ppp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

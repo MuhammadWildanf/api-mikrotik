@@ -230,6 +230,7 @@
                             remoteaddress: item.remoteaddress // tambahkan atribut data untuk menyimpan remoteaddress
                         }));
                     });
+                    $('#vpn_id option:first').prop('selected', true).change();
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
