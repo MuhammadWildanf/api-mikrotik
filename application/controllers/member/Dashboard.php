@@ -7,16 +7,12 @@ class Dashboard extends CI_Controller
         
         parent::__construct();
 
-        //cek session login
-        if($this->session->userdata("id") == "") {
-            redirect('member/login');
-        }
-
     }
 
     public function index()
     {
         //load view form login
+        $saldo = 
         $this->load->view('member/main');
         $this->load->view('member/dashboard');
     }

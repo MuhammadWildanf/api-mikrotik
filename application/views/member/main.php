@@ -37,7 +37,7 @@
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('member/login/logout');?>">
+          <a class="nav-link" href="<?= base_url('member/login/logout'); ?>">
             <i class="fas fa-power-off"></i>
           </a>
         </li>
@@ -56,10 +56,18 @@
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar Menu -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="<?= base_url('assets/template') ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block"><?php echo $this->session->userdata("nama") ?></a>
+          </div>
+        </div>
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="<?= site_url('member/dashboard');?>" class="nav-link" >
+              <a href="<?= site_url('member/dashboard'); ?>" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -70,21 +78,44 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-wifi"></i>
                 <p>
-                 Layanan
+                  Layanan
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?= base_url("member/vpn")?>" class="nav-link">
+                  <a href="<?= base_url("member/vpn") ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>VPN Akun</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url("member/port")?>" class="nav-link">
+                  <a href="<?= base_url("member/port") ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Port remote</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-bars"></i>
+                <p>
+                  Konfigurasi
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= base_url("member/akun") ?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Akun</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= base_url("member/saldo") ?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Saldo</p>
                   </a>
                 </li>
               </ul>
@@ -149,4 +180,4 @@
 
 </html>
 
-<?php ini_set('display_errors','off');?>
+<?php ini_set('display_errors', 'off'); ?>
