@@ -41,4 +41,5 @@ class M_vpn extends CI_Model {
         $this->db->where('id', $id);
         $this->db->delete('remote_vpn');
     }
+
 }
