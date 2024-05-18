@@ -192,7 +192,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p class="text-success text-center"><strong>PEMBUATAN AKUN BERHASIL SILAHKAN </br> COPY PASTE SCRIPT DIBAWAH INI KE TERMINAL WINBOX</strong></p>
+                <p class="text-success text-center"><strong>PEMBUATAN RULE FORWADING BERHASIL SILAHKAN </br> COPY PASTE SCRIPT DIBAWAH INI KE TERMINAL WINBOX</strong></p>
                 <p><strong></strong> <span id="detail-sentence"></span></p>
             </div>
             <div class="modal-footer">

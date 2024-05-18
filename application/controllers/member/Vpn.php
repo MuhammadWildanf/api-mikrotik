@@ -7,6 +7,7 @@ class Vpn extends CI_Controller
     {
         parent::__construct();
         $this->load->model('m_vpn');
+        $this->load->model('m_saldo');
         $this->load->library('form_validation');
     }
 
@@ -51,7 +52,8 @@ class Vpn extends CI_Controller
                 'password' => $this->input->post('password'),
                 'localaddress' => $this->input->post('localaddress'),
                 'remoteaddress' => $this->input->post('remoteaddress'),
-                'comment' => $this->input->post('comment')
+                'comment' => $this->input->post('comment') , 
+                'status' => 'Belum Terdaftar'
             ]);
         }
 

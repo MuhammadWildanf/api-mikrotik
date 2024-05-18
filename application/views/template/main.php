@@ -64,7 +64,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                  VPN
+                  MEMBER VPN
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -72,7 +72,7 @@
                 <li class="nav-item">
                   <a href="<?= site_url('ppp/secret')?>" class="nav-link <?= $title =='PPP Secret Mikweb' ? 'active': ''?>">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Akun</p>
+                    <p>Akun VPN</p>
                   </a>
                 </li>
                 <li class="nav-item">
