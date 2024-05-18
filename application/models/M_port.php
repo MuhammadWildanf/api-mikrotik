@@ -16,9 +16,10 @@ class M_port extends CI_Model
 
     public function get_all_ports()
     {
-        $this->db->select('remote_port.*, remote_vpn.nama AS nama_vpn');
+        $this->db->select('remote_port.*, remote_vpn.nama AS nama_vpn, users.nama AS nama_user');
         $this->db->from('remote_port');
         $this->db->join('remote_vpn', 'remote_port.vpn_id = remote_vpn.id');
+        $this->db->join('users', 'remote_port.user_id = users.id');
         $this->db->order_by('remote_port.id', 'DESC');
         return $this->db->get();
     }

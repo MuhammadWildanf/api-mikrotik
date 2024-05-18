@@ -27,7 +27,8 @@
                                     <thead>
                                         <tr>
                                             <th>Action</th>
-                                            <th>Nama VPN</th>
+                                            <th>Nama Member</th>
+                                            <th>Akun VPN</th>
                                             <th>Port Awal</th>
                                             <th>Port Foward</th>
                                             <th>Ip Vpn</th>
@@ -40,7 +41,7 @@
                                         <?php foreach ($port as $data) { ?>
                                             <tr>
                                                 <td>
-                                                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="<?= $data->id ?>" data-nama_vpn="<?= $data->nama_vpn ?>" data-port_awal="<?= $data->port_awal ?>" data-port_to="<?= $data->port_to ?>" data-ip_vpn="<?= $data->ip_vpn ?>" data-ip_remote="<?= $data->ip_remote ?>" data-comment="<?= $data->comment ?>" data-status="<?= $data->status ?>">
+                                                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="<?= $data->id ?>" data-nama_user="<?= $data->nama_user ?>" data-nama_vpn="<?= $data->nama_vpn ?>" data-port_awal="<?= $data->port_awal ?>" data-port_to="<?= $data->port_to ?>" data-ip_vpn="<?= $data->ip_vpn ?>" data-ip_remote="<?= $data->ip_remote ?>" data-comment="<?= $data->comment ?>" data-status="<?= $data->status ?>">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="<?= $data->id ?>">
@@ -50,6 +51,7 @@
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </td>
+                                                <td><?= $data->nama_user; ?></td>
                                                 <td><?= $data->nama_vpn; ?></td>
                                                 <td><?= $data->port_awal; ?></td>
                                                 <td><?= $data->port_to; ?></td>
@@ -140,6 +142,11 @@
             <form id="editForm" action="<?= site_url('forwading/updateport'); ?>" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="id" id="edit_id">
+                    <div class="mb-3">
+                        <label for="edit_nama_user" class="form-label">Nama User</label>
+                        <input type="text" class="form-control" name="nama_user" id="edit_nama_user" readonly>
+                    </div>
+
                     <div class="mb-3">
                         <label for="edit_nama_vpn" class="form-label">Nama VPN</label>
                         <input type="text" class="form-control" name="nama_vpn" id="edit_nama_vpn" readonly>
@@ -266,6 +273,7 @@
 <script>
     $(document).on("click", ".edit-btn", function() {
         var id = $(this).data('id');
+        var nama_user = $(this).data('nama_user');
         var nama_vpn = $(this).data('nama_vpn');
         var port_awal = $(this).data('port_awal');
         var port_to = $(this).data('port_to');
@@ -274,11 +282,12 @@
         var comment = $(this).data('comment');
         var status = $(this).data('status');
 
-        showModalEdit(id, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment, status);
+        showModalEdit(id,nama_user, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment, status);
     });
 
-    function showModalEdit(id, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment, status) {
+    function showModalEdit(id,nama_user, nama_vpn, port_awal, port_to, ip_vpn, ip_remote, comment, status) {
         $("#edit_id").val(id);
+        $("#edit_nama_user").val(nama_user);
         $("#edit_nama_vpn").val(nama_vpn);
         $("#edit_port_awal").val(port_awal);
         $("#edit_port_to").val(port_to);
