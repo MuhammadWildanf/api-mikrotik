@@ -24,8 +24,12 @@ class Ppp extends CI_Controller
         // echo '</pre>';
         // die;
         $profile = $API->comm('/ppp/profile/print');
+        $vpn_list = $this->M_vpn->vpn_all()->result_array();
+        // var_dump($vpn_list);
+        // die;
         $data = [
             'title' => 'PPP Secret',
+            'vpn_list' => $vpn_list,
             'totalsecret' => count($secret),
             'secret' => $secret,
             'profile' => $profile,
