@@ -14,21 +14,17 @@ class Vpn extends CI_Controller
     public function index()
     {
         $user_id = $this->session->userdata('id');
-
         $data = [
             'title' => 'VPN Akun',
             'vpn'   => $this->m_vpn->get_vpn($user_id)->result()
         ];
 
-        // var_dump($data);
-        // die;
         $this->load->view('member/main', $data);
         $this->load->view('member/vpn', $data);
     }
 
     public function addvpn()
     {
-
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
         $this->form_validation->set_rules('user', 'User', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');

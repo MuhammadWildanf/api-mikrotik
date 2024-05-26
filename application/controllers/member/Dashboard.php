@@ -7,7 +7,7 @@ class Dashboard extends CI_Controller
     {
 
         parent::__construct();
-        $this->load->model('m_saldo');
+        $this->load->model('m_topup');
         $this->load->model('m_vpn');
     }
 
@@ -15,11 +15,11 @@ class Dashboard extends CI_Controller
     {
         $user_id = $this->session->userdata('id');
         $totalvpn = $this->m_vpn->get_vpn($user_id)->result();
-        $totalsaldo = $this->m_saldo->count_nominal($user_id);
+        // $totalsaldo = $this->m_topup->count_nominal($user_id);
         $data = [
             'title' => 'Dashboard',
             'totalvpn' => count($totalvpn),
-            'totalsaldo' => $totalsaldo
+            // 'totalsaldo' => $totalsaldo
         ];
         $this->load->view('member/main');
         $this->load->view('member/dashboard', $data);

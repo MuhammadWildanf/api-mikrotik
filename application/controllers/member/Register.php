@@ -18,7 +18,6 @@ class Register extends CI_Controller {
             'password'       => password_hash($this->input->post('password'), PASSWORD_DEFAULT),    
             'notlp'       => $this->input->post('notlp'),
             'alamat'       => $this->input->post('alamat'),
-
         );
 
         $register = $this->auth_model->simpan_register($data);

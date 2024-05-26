@@ -62,6 +62,31 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Master
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= site_url('panduan')?>" class="nav-link <?= $title =='Panduan' ? 'active': ''?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Panduan</p>
+                  </a>
+                </li>
+              </ul>
+              <!-- <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= site_url('harga')?>" class="nav-link <?= $title =='Harga' ? 'active': ''?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Harga</p>
+                  </a>
+                </li>
+              </ul> -->
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   MEMBER VPN

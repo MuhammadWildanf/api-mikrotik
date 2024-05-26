@@ -39,9 +39,22 @@
 		<div class="container-fluid">
 			<div class="card">
 				<div class="card-header">
-					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-add-saldo">
-						<i class="fas fa-plus" style="color: blue;"></i> Add <?= $title ?>
-					</button>
+					<form id="payment-form" action="<?= site_url() ?>/member/saldo/finish" method="post">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<input type="hidden" name="result_type" id="result-type" value="">
+								<input type="hidden" name="result_data" id="result-data" value="">
+								<div class="col">
+									<input type="text" class="form-control" name="nominal" id="nominal" placeholder="Nominal Topup" required>
+								</div>
+								<div class="col">
+									<button type="button" id="pay-button" class="btn btn-secondary">
+										<i class="fas fa-plus" style="color: blue;"></i> Add <?= $title ?>
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
 				<div class="card-body">
 					<div class="row">
@@ -51,26 +64,34 @@
 									<thead>
 										<tr>
 											<th>ID Transaksi</th>
-											<th>Tanggal transaksi</th>
 											<th>Nominal</th>
+											<th>Payment Type</th>
+											<th>Bank</th>
+											<th>Va Number</th>
+											<th>Transaction Time</th>
 											<th>Status</th>
-											<th>Pembayaran</th>
-											<th>Action</th>
+											<th>Detail</th>
 										</tr>
 									</thead>
 									<tbody>
-										<?php foreach ($saldo as $data) { ?>
+										<?php foreach ($midtrans as $data) { ?>
 											<tr>
-												<td><?= $data->id; ?></td>
-												<td><?= $data->tanggal; ?></td>
-												<td><?= number_format($data->nominal, 0, ',', '.'); ?></td>
-												<td> <span class="badge <?= $data->status == 'BELUM DIBAYAR' ? 'bg-danger' : ($data->status == 'LUNAS' ? 'bg-success' : 'bg-secondary') ?>">
-														<?= $data->status; ?>
-													</span></td>
-												<td><?= $data->pembayaran; ?></td>
-												<td> <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="<?= $data->id ?>">
-														<i class="fas fa-trash"></i>
-													</a></td>
+												<td><?= $data->order_id; ?></td>
+												<td><?= number_format($data->gross_amount, 0, ',', '.'); ?></td>
+												<td><?= $data->payment_type; ?></td>
+												<td><?= $data->bank; ?></td>
+												<td><?= $data->va_number; ?></td>
+												<td><?= $data->transaction_time; ?></td>
+												<td>
+													<?php
+													if ($data->status_code == "200") {
+														echo '<span class="badge bg-success">Success</span>';
+													} else {
+														echo '<span class="badge bg-warning">Pending</span>';
+													}
+													?>
+												</td>
+												<td><a href="<?= $data->pdf_url; ?>" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm">Cara Pembayaran</a></td>
 											</tr>
 										<?php } ?>
 									</tbody>
@@ -84,30 +105,8 @@
 	</section>
 
 </div>
-
-<div class="modal fade" id="modal-add-saldo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title fs-5" id="exampleModalLabel">Add <?= $title ?></h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<form id="addForm" action="<?= site_url('member/saldo/addsaldo'); ?>" method="post">
-				<div class="modal-body">
-					<div class="mb-3">
-						<label for="nominal" class="form-label">Isi saldo Minimal Rp. 10.000</label>
-						<input type="text" class="form-control" name="nominal" id="add_nominal" placeholder="nominal">
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save changes</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
+<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-eb2QJIH_yqjtsGRW"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 	$(document).on("click", ".delete-btn", function() {
 		var id = $(this).data('id');
@@ -130,5 +129,67 @@
 				}
 			});
 		}
+	});
+
+
+	$('#pay-button').click(function(event) {
+		event.preventDefault();
+		$(this).attr("disabled", "disabled");
+		var nominal = $('#nominal').val();
+
+		if (nominal === '') {
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Mohon masukkan nominal topup.',
+			});
+			$(this).removeAttr("disabled");
+			return;
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: '<?= site_url() ?>/member/saldo/token',
+			data: {
+				nominal: nominal
+			},
+			cache: false,
+
+			success: function(data) {
+				//location = data;
+
+				console.log('token = ' + data);
+
+				var resultType = document.getElementById('result-type');
+				var resultData = document.getElementById('result-data');
+
+				function changeResult(type, data) {
+					$("#result-type").val(type);
+					$("#result-data").val(JSON.stringify(data));
+					//resultType.innerHTML = type;
+					//resultData.innerHTML = JSON.stringify(data);
+				}
+
+				snap.pay(data, {
+
+					onSuccess: function(result) {
+						changeResult('success', result);
+						console.log(result.status_message);
+						console.log(result);
+						$("#payment-form").submit();
+					},
+					onPending: function(result) {
+						changeResult('pending', result);
+						console.log(result.status_message);
+						$("#payment-form").submit();
+					},
+					onError: function(result) {
+						changeResult('error', result);
+						console.log(result.status_message);
+						$("#payment-form").submit();
+					}
+				});
+			}
+		});
 	});
 </script>

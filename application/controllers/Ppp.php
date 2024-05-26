@@ -17,16 +17,10 @@ class Ppp extends CI_Controller
         $password = $this->session->userdata('password');
         $API = new Mikweb();
         $API->connect($ip, $user, $password);
-        // $API->connect('103.169.7.234', 'wildan', '1234');
         $secret = $API->comm('/ppp/secret/print');
-        // echo '<pre>';
-        // var_dump($secret);
-        // echo '</pre>';
-        // die;
         $profile = $API->comm('/ppp/profile/print');
         $vpn_list = $this->M_vpn->vpn_all()->result_array();
-        // var_dump($vpn_list);
-        // die;
+       
         $data = [
             'title' => 'PPP Secret',
             'vpn_list' => $vpn_list,
@@ -45,7 +39,6 @@ class Ppp extends CI_Controller
         $API->connect('103.169.7.234', 'wildan', '1234');
         $secret = $API->comm('/ppp/secret/print');
 
-        // Memproses data untuk menemukan alamat IP yang paling baru
         $latestIP = "";
         foreach ($secret as $entry) {
             $remoteAddress = $entry['remote-address'];

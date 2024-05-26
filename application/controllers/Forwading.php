@@ -12,7 +12,6 @@ class Forwading extends CI_Controller
 
     public function index()
     {
-
         $data = [
             'title' => 'Forwading Port',
             'port'   => $this->m_port->get_all_ports()->result()

@@ -14,14 +14,10 @@ class Port extends CI_Controller
     public function index()
     {
         $user_id = $this->session->userdata('id');
-
         $data = [
             'title' => 'Rule Port Remote',
             'port'   => $this->m_port->get_port($user_id)->result()
         ];
-
-        // var_dump($data);
-        // die;
         $this->load->view('member/main', $data);
         $this->load->view('member/port', $data);
     }
@@ -43,19 +39,15 @@ class Port extends CI_Controller
 
     public function addport()
     {
-
         $this->form_validation->set_rules('port_awal', 'Port Awal', 'trim|required');
         $this->form_validation->set_rules('port_to', 'Port Foward Ke', 'trim|required');
         $this->form_validation->set_rules('ip_vpn', 'IP VPN', 'trim|required');
         $this->form_validation->set_rules('ip_remote', 'IP Remote', 'trim|required');
         $this->form_validation->set_rules('comment', 'Comment', 'trim|required');
-
         if ($this->form_validation->run() == false) {
-
             $error = [
                 'error' => validation_errors()
             ];
-
             $this->session->set_flashdata($error);
         } else {
             $user_id = $this->session->userdata('id');
