@@ -19,7 +19,7 @@
 		<div class="container-fluid">
 
 			<div class="row justify-content-center">
-				<div class="col-12 col-md-3">
+				<div class="col-12 col-md-4">
 					<div class="info-box">
 						<span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 						<div class="info-box-content">
@@ -35,7 +35,7 @@
 
 
 				<div class="clearfix hidden-md-up"></div>
-				<div class="col-12 col-md-3">
+				<!-- <div class="col-12 col-md-4">
 					<div class="info-box mb-3">
 						<span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 						<div class="info-box-content">
@@ -45,9 +45,9 @@
 
 					</div>
 
-				</div>
+				</div> -->
 
-				<div class="col-12 col-md-3">
+				<div class="col-12 col-md-4">
 					<div class="info-box mb-3">
 						<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 						<div class="info-box-content">
@@ -58,7 +58,7 @@
 					</div>
 
 				</div>
-				<div class="col-12 col-md-3">
+				<div class="col-12 col-md-4">
 					<div class="info-box mb-3">
 						<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 						<div class="info-box-content">
