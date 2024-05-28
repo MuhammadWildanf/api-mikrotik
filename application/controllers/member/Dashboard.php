@@ -15,10 +15,12 @@ class Dashboard extends CI_Controller
     {
         $user_id = $this->session->userdata('id');
         $totalvpn = $this->m_vpn->get_vpn($user_id)->result();
+        $totalrule = $this->m_vpn->get_port($user_id)->result();
         // $totalsaldo = $this->m_topup->count_nominal($user_id);
         $data = [
             'title' => 'Dashboard',
             'totalvpn' => count($totalvpn),
+            'totalrule' => count($totalrule),
             // 'totalsaldo' => $totalsaldo
         ];
         $this->load->view('member/main');

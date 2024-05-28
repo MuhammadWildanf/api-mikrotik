@@ -19,7 +19,7 @@
 		<div class="container-fluid">
 
 			<div class="row justify-content-center">
-				<div class="col-12 col-md-4 col-md-3">
+				<div class="col-12 col-md-3">
 					<div class="info-box">
 						<span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 						<div class="info-box-content">
@@ -35,7 +35,7 @@
 
 
 				<div class="clearfix hidden-md-up"></div>
-				<div class="col-12 col-md-4 col-md-3">
+				<div class="col-12 col-md-3">
 					<div class="info-box mb-3">
 						<span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 						<div class="info-box-content">
@@ -47,12 +47,23 @@
 
 				</div>
 
-				<div class="col-12 col-md-4 col-md-3">
+				<div class="col-12 col-md-3">
 					<div class="info-box mb-3">
 						<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Akun VPN anda </span>
 							<span class="info-box-number"><?= $totalvpn?></span>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="col-12 col-md-3">
+					<div class="info-box mb-3">
+						<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">Rule Forward </span>
+							<span class="info-box-number"><?= $totalrule?></span>
 						</div>
 
 					</div>

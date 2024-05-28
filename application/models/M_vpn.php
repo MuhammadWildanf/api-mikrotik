@@ -12,6 +12,15 @@ class M_vpn extends CI_Model {
         return $this->db->get();
     }
 
+    public function get_port($user_id)
+    {
+        $this->db->select('*');
+        $this->db->from('remote_port');
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by('id', 'DESC');
+        return $this->db->get();
+    }
+
     public function vpn_all()
     {
         $this->db->select('*');
