@@ -16,6 +16,17 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`mikweb` /*!40100 DEFAULT CHARACTER SET 
 
 USE `mikweb`;
 
+/*Table structure for table `panduan` */
+
+DROP TABLE IF EXISTS `panduan`;
+
+CREATE TABLE `panduan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `judul` varchar(255) NOT NULL,
+  `keterangan` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
 /*Table structure for table `remote_port` */
 
 DROP TABLE IF EXISTS `remote_port`;
@@ -30,8 +41,12 @@ CREATE TABLE `remote_port` (
   `ip_remote` varchar(250) NOT NULL,
   `comment` varchar(250) NOT NULL,
   `status` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  KEY `remote_port_FK` (`user_id`),
+  KEY `remote_port_FK_1` (`vpn_id`),
+  CONSTRAINT `remote_port_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `remote_port_FK_1` FOREIGN KEY (`vpn_id`) REFERENCES `remote_vpn` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Table structure for table `remote_vpn` */
 
@@ -46,35 +61,43 @@ CREATE TABLE `remote_vpn` (
   `localaddress` varchar(250) NOT NULL,
   `remoteaddress` varchar(250) NOT NULL,
   `comment` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
-
-/*Table structure for table `saldo` */
-
-DROP TABLE IF EXISTS `saldo`;
-
-CREATE TABLE `saldo` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL,
-  `tanggal` datetime DEFAULT current_timestamp(),
-  `nominal` varchar(250) DEFAULT NULL,
-  `pembayaran` varchar(250) DEFAULT NULL,
-  `status` varchar(250) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
-
-/*Table structure for table `transaksi` */
-
-DROP TABLE IF EXISTS `transaksi`;
-
-CREATE TABLE `transaksi` (
-  `id_transaksi` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `jumlah_port` varchar(250) NOT NULL,
-  `tanggal` date NOT NULL DEFAULT current_timestamp(),
-  `total_transaksi` varchar(250) NOT NULL,
   `status` varchar(250) NOT NULL,
-  PRIMARY KEY (`id_transaksi`)
+  PRIMARY KEY (`id`),
+  KEY `remote_vpn_FK` (`user_id`),
+  CONSTRAINT `remote_vpn_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Table structure for table `transaksi_midtrans` */
+
+DROP TABLE IF EXISTS `transaksi_midtrans`;
+
+CREATE TABLE `transaksi_midtrans` (
+  `order_id` char(10) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `gross_amount` int(11) NOT NULL,
+  `payment_type` varchar(13) NOT NULL,
+  `transaction_time` varchar(19) NOT NULL,
+  `bank` varchar(10) NOT NULL,
+  `va_number` varchar(30) NOT NULL,
+  `pdf_url` text NOT NULL,
+  `status_code` char(3) NOT NULL,
+  KEY `transaksi_midtrans_FK` (`user_id`),
+  CONSTRAINT `transaksi_midtrans_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Table structure for table `transaksi_saldo` */
+
+DROP TABLE IF EXISTS `transaksi_saldo`;
+
+CREATE TABLE `transaksi_saldo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `amount` varchar(250) DEFAULT NULL,
+  `type` enum('Topup','Pembayaran') NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `transaksi_saldo_FK` (`user_id`),
+  CONSTRAINT `transaksi_saldo_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Table structure for table `users` */
@@ -88,6 +111,7 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `notlp` varchar(100) NOT NULL,
   `alamat` varchar(255) NOT NULL,
+  `saldo` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 

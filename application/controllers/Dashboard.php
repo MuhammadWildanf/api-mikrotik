@@ -11,16 +11,16 @@ class Dashboard extends CI_Controller {
 		$API = new Mikweb();
 		// $API->connect('103.169.7.234', 'wildan', '1234');
 		$API->connect($ip, $user, $password);
-		$hotspotuser = $API->comm('/ip/hotspot/user/print');
-		$hotspotactiv = $API->comm('/ip/hotspot/active/print');
+		$ppp = $API->comm('/ppp/secret/print');
+		$pppactive = $API->comm('/ppp/active/getall');
 		$resource = $API->comm('/system/resource/print');
 		$resource = json_encode($resource);
 		$resource = json_decode($resource,true);
 
 		$data = [
 			'title' => 'Dashboard Mikweb',
-			'hotspotuser' => count($hotspotuser),
-			'hotspotactiv' => count($hotspotactiv),
+			'ppp' => count($ppp),
+			'pppactive' => count($pppactive),
 			'cpu' => $resource['0']['cpu-load'],
 			'uptime' => $resource['0']['uptime'],
 		];

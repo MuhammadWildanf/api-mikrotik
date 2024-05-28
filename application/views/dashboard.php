@@ -24,8 +24,8 @@
 							<span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
 							<div class="info-box-content">
-								<span class="info-box-text">Hotspot Aktiv</span>
-								<span class="info-box-number"><?= $hotspotactiv ?></span>
+								<span class="info-box-text">PPP Aktiv</span>
+								<span class="info-box-number"><?= $pppactive ?></span>
 							</div>
 							<!-- /.info-box-content -->
 						</div>
@@ -41,8 +41,8 @@
 							<span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
 							<div class="info-box-content">
-								<span class="info-box-text">Hotspot User</span>
-								<span class="info-box-number"><?= $hotspotuser ?></span>
+								<span class="info-box-text">PPP</span>
+								<span class="info-box-number"><?= $ppp ?></span>
 							</div>
 							<!-- /.info-box-content -->
 						</div>

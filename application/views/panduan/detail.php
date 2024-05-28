@@ -10,7 +10,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="Keterangan" class="form-label">Keterangan</label>
-                        <textarea class="form-control" name="keterangan" id="Keterangan" placeholder="Keterangan" readonly><?= $panduan->keterangan ?></textarea>
+                        <p name="keterangan" id="Keterangan" placeholder="Keterangan" readonly><?= $panduan->keterangan ?></p>
                     </div>
                     <div class="modal-footer">
                         <a href="<?= site_url('panduan/index') ?>" class="btn btn-secondary">Close</a>

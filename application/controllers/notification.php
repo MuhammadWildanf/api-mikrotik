@@ -1,6 +1,7 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Notification extends CI_Controller {
+class Notification extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -20,27 +21,29 @@ class Notification extends CI_Controller {
 
 
 	public function __construct()
-    {
-        parent::__construct();
-        $params = array('server_key' => 'your_server_key', 'production' => false);
+	{
+		parent::__construct();
+		$params = array('server_key' => 'SB-Mid-server-auTl9LHRurVWOqffTfGPre_v', 'production' => false);
 		$this->load->library('veritrans');
 		$this->veritrans->config($params);
 		$this->load->helper('url');
-		
-    }
+	}
 
 	public function index()
 	{
 		echo 'test notification handler';
 		$json_result = file_get_contents('php://input');
-		$result = json_decode($json_result);
+		$result = json_decode($json_result, true);
 
-		if($result){
-		$notif = $this->veritrans->status($result->order_id);
+		$order_id = $result['order_id'];
+		$data = [
+			'status_code' => $result['status_code']
+		];
+
+		if ($result['status_code'] == 200) {
+			$this->db->update('transaksi_midtrans', $data, array('order_id' => $order_id));
 		}
-
-		error_log(print_r($result,TRUE));
-
+		
 		//notification handler sample
 
 		/*
@@ -75,6 +78,5 @@ class Notification extends CI_Controller {
 		  // TODO set payment status in merchant's database to 'Denied'
 		  echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
 		}*/
-
 	}
 }

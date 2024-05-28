@@ -110,23 +110,29 @@ class Saldo extends CI_Controller
 
     public function finish()
     {
+
         $result = json_decode($this->input->post('result_data'));
-        $user_id = $this->session->userdata('id');
-        $simpan = $this->m_topup->add_topup($result);
+    	echo 'RESULT <br><pre>';
+    	var_dump($result);
+    	echo '</pre>' ;
+
+        // $result = json_decode($this->input->post('result_data'));
+        // $user_id = $this->session->userdata('id');
+        // $simpan = $this->m_topup->add_topup($result);
 
 
-        if ($simpan) {
-            $this->session->set_flashdata('success_msg', 'Transaksi Midtrans berhasil disimpan.');
+        // if ($simpan) {
+        //     $this->session->set_flashdata('success_msg', 'Transaksi Midtrans berhasil disimpan.');
 
-            if ($result->status_code == "200") {
-                $new_balance = $this->m_user->get_user_balance($user_id) + $result->gross_amount;
-                $this->m_user->update_user_balance($user_id, $new_balance);
-                $this->m_saldo->record_transaction($user_id, $result->gross_amount, 'Topup');
-            }
-        } else {
-            $this->session->set_flashdata('error_msg', 'Gagal menyimpan data transaksi Midtrans.');
-        }
+        //     if ($result->status_code == "200") {
+        //         $new_balance = $this->m_user->get_user_balance($user_id) + $result->gross_amount;
+        //         $this->m_user->update_user_balance($user_id, $new_balance);
+        //         $this->m_saldo->record_transaction($user_id, $result->gross_amount, 'Topup');
+        //     }
+        // } else {
+        //     $this->session->set_flashdata('error_msg', 'Gagal menyimpan data transaksi Midtrans.');
+        // }
 
-        redirect('member/saldo');
+        // redirect('member/saldo');
     }
 }
